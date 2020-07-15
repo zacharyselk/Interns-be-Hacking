@@ -135,16 +135,16 @@
 
 <div id="id01" class="modal">
 
-    <form class="modal-content animate" action="/action_page.php" method="post">
+    <form class="modal-content animate"  method="post">
 
         <div class="container">
             <label for="user">Are you a student?</label> <br>
-            <input type="radio" id="yes" name="userType" value="yes">
+            <input type="radio" id="yes" name="userType" value="student_assignment.html">
             <label for="yes">Yes</label> <br>
-            <input type="radio" id="no" name="userType" value="no">
+            <input type="radio" id="no" name="userType" value="parent_assigns.html">
             <label for="no">No</label>
 
-            <button type="submit" onclick="window.location='index.html'">Submit</button>
+            <button type="submit" id="submit">Submit</button>
 
         </div>
 
@@ -158,13 +158,30 @@
 <script>
     // Get the modal
     var modal = document.getElementById('id01');
+    var submit = document.getElementById('submit');
+
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
+        // console.log(document.getElementById('yes').checked);
         if (event.target == modal) {
             modal.style.display = "none";
         }
+        if(event.target == submit){
+            if(document.getElementById('yes').checked) {
+                window.open('student_assignment.html');
+            }
+            if(document.getElementById('no').checked) {
+                window.open('parent_assigns.html');
+            }
+        }
     }
+
+    // $( "#submit" ).click(function( event ) {
+    //
+    //     window.open($('input[type="radio"]:checked').value());
+    // });
+
 </script>
 
 </body>
