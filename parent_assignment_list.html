@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+    #t01 {
+        width: 100%;
+        background-color: #f1f1c1;
+    }
+</style>
+<body>
+<h1>Assignments</h1>
+<table style="width:100%">
+    <tr onclick=myFunction(this)>
+        <th>Assignments</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for d in data %}
+    <tr onclick=myFunction(this)>
+        <td>{{d["assignment_name"]}}</td>
+        <td>{{d["assignment_duedate"]}}</td>
+        <td>{{d["assignment_status"]}}</td>
+    </tr>
+
+</table>
+<script>
+    function myFunction(x) {
+        window.open('parent_assignment.html/', '_self');
+    }
+</script>
+</body>
+</html>
