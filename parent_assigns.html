@@ -8,6 +8,7 @@
 		var i = 0;
 		function addSkill(){
 			var skills= document.getElementById("addSkill").value;
+
 			if(skills != ""){
 				skillList += "<li><span name='skillItem' id='skillItem"+ i +"'>" + skills + "</span> " +
 						"<a onclick='removeSkill()'>remove</a></li>";
@@ -62,14 +63,11 @@ Assignment description...</textarea><br><br>
     <label for="startDate">End date:</label>
     <input type="date" name="Enddate" id="endDate"><br><br>
 
-	<td><label>Links:</label></td>
+	<td><label>Tasks/Links:</label></td>
 	<td>
-<!--		<ul id="Links: "></ul>-->
-<!--		<input type="url" name="links" id="addLinks"/>-->
-<!--		<a onclick="addLinks();" value="">add link</a>-->
 		<ul id="skill"></ul>
-		<input type="text" name="skill" id="addSkill"/>
-		<a onclick="addSkill();" value="">add skill</a>
+		<input type="url" name="skill" id="addSkill"/>
+		<a onclick="addSkill();" value="">add tasks/links</a>
 	</td><br><br>
 
     <fieldset>
