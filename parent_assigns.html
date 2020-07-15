@@ -26,8 +26,8 @@
 			for(var j = 0; j < items.length; j++){
 				items[j].onclick = function(){
 
-					index = tab.indexOf(this.innerHTML);
-					items[index].parentNode.removeChild(items[index]);
+					parent_assigns = tab.indexOf(this.innerHTML);
+					items[parent_assigns].parentNode.removeChild(items[parent_assigns]);
 					tab.pop(j,1);
 				};
 			}
@@ -50,7 +50,7 @@
 
 <h1>Create an Assignment</h1>
 
-<form id="upload" action="index.html" method="POST" enctype="multipart/form-data">
+<form id="upload" action="parent_assigns.html" method="POST" enctype="multipart/form-data">
 
     <label for="title">Title:</label>
     <input type="text" id="title" name="title"><br><br>
