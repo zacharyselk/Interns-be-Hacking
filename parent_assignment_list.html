@@ -53,7 +53,7 @@
     <tr onclick=myFunction(this)>
         <td>{{d["assignment_name"]}}</td>
         <td>{{d["assignment_duedate"]}}</td>
-        <td>{{d["assignment_status"]}}</td>
+        <td id="checkbox"></td>
     </tr>
 
 </table>
@@ -62,6 +62,13 @@
 <button class="button big-btn" id="button" value="parent_assigns.html">Add Assignment </button>
 
 <script>
+
+    document.getElementById("checkbox").innerHTML = "❌";
+    if( {{ d["status"] }} == "complete" ){
+        document.getElementById("checkbox").innerHTML = "✅";
+    }
+
+
     var button = document.getElementById('button');
 
     window.onclick = function(event) {
