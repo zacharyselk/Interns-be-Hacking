@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <link rel="stylesheet" type="text/css" media="all" href="styles.css"/>
+
+</head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        text-align: left;
+    }
+    #t01 {
+        width: 100%;
+        background-color: #f1f1c1;
+    }
+    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:hover {background-color: #ddd;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgba(0, 142, 250, 0.29);
+        color: black;
+    }
+</style>
+<body>
+<h1>Student Assignments</h1>
+<table style="width:100%">
+    <tr onclick=myFunction(this)>
+        <th>Assignments</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for d in data %}
+    <tr onclick=myFunction(this)>
+        <td>{{d["assignment_name"]}}
+                <form action="{{ url_for('do_assignment') }}" method="post">
+                    <input hidden name="id" value={{d["_id"]}}>
+                <input type="submit" value="Do Assignment" />
+                </form>
+        </td>
+        <td>{{d["assignment_duedate"]}}</td>
+        <td>{{d["assignment_status"]}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<script>
+    function myFunction(x) {
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <link rel="stylesheet" type="text/css" media="all" href="styles.css"/>-->
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    table, th, td {
+        font-family: Arial, Helvetica, sans-serif;
+        border: 1px solid black;
+        border-collapse: collapse;
+
+    }
+    th, td {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 15px;
+        text-align: left;
+    }
+    #t01 {
+        width: 100%;
+        background-color: #f1f1c1;
+    }
+    .big-btn {
+        background-color: #000000;
+        color: #FFFFFF;
+        padding: 10px;
+        width: 150px;
+        height: 40px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        margin:10px
+    }
+
+    .big-btn:hover {
+        background: rgba(0, 142, 250, 0.49);
+        border: 4px solid white;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2;}
+    tr:hover {background-color: #ddd;}
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: rgba(0, 142, 250, 0.29);
+        color: black;
+    }
+</style>
+<body>
+<h1>Assignments</h1>
+<table style="width:100%">
+    <tr onclick=myFunction(this)>
+        <th>Assignments</th>
+        <th>Due Date</th>
+        <th>Status</th>
+    </tr>
+    {% for d in data %}
+    <tr id="row" onclick=myFunction(this)>
+        <td>{{d["assignment_name"]}}</td>
+        <td>{{d["assignment_duedate"]}}</td>
+        <td id="status">{{d["assignment_status"]}}</td>
+<!--        <td id="checkbox"></td>-->
+    </tr>
+    {% endfor %}
+
+</table>
+
+<script>
+
+    var button = document.getElementById('button');
+
+    window.onclick = function(event) {
+        if(event.target == button){
+            window.open('{{ url_for('make_assignment') }}', '_self');
+        }
+    }
+
+    function myFunction(x) {
+        window.open('assignment.html', '_self');
+    }
+</script>
+
+<br><br>
+<!--<button class="button big-btn" id="button" value="{{ url_for('make_assignment') }}">Add Assignment </button>-->
+<form action="{{ url_for('make_assignment') }}" method="post">
+    <input class="button big-btn" type="submit" value="Add Assignment" />
+</form>
+
+</body>
+</html>
