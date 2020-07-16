@@ -22,6 +22,7 @@ class Assignment:
         self.text = text
         self.due_date = due_date
         self.completed = completed
+        self.document_ref = None
 
     def get_data(self):
         return {
@@ -58,18 +59,20 @@ class Database:
         for assignment in self.list_assignments():
             asn = self.database[assignment]
             print(asn)
-            assignments.append(Assignment(asn['_id'], asn['Title'], asn['Text'],
-                                          asn['Due Date'], asn['Completed']))
-        print(assignments)
+            asn_obj = Assignment(asn['_id'], asn['Title'], asn['Text'],
+                                 asn['Due Date'], asn['Completed']))
+            asn_obj.document_ref = self.database[assignment]
+            assignments.append(asn_obj)
+
         return assignments
 
 
-    def add_attachment(self, document, name):
-        with open(name, "rb") as f:
+    def add_attachment(self, assignment, path, name):
+        with open(path, "rb") as f:
             content_type = mimetypes.MimeTypes().guess_type('test-img.jpg')[0]
             main_type, sub_type = content_type.split('/', 1)
             msg = f.read()
-            document.put_attachment(name, content_type, msg)
+            assignment.document_ref.put_attachment(name, content_type, msg)
 
 
     def get_data(self, assignment):
