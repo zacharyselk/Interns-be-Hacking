@@ -17,7 +17,7 @@
     th, td {
         font-family: Arial, Helvetica, sans-serif;
         padding: 15px;
-        text-align: left;
+        text-align: center;
     }
     #t01 {
         width: 100%;
@@ -36,14 +36,19 @@
     <tr onclick=myFunction(this)>
         <td>{{d["assignment_name"]}}</td>
         <td>{{d["assignment_duedate"]}}</td>
-        <td>{{d["assignment_status"]}}</td>
+        <td id="checkbox"></td>
     </tr>
     {{% endfor %}}
 
 </table>
 <script>
+    document.getElementById("checkbox").innerHTML = "❌";
+    if( {{ d["status"] }} == "complete" ){
+        document.getElementById("checkbox").innerHTML = "✅";
+    }
+
     function myFunction(x) {
-    window.open('student_assignment.html', '_self');
+        window.open('student_assignment.html', '_self');
     }
 </script>
 </body>
