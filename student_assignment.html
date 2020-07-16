@@ -6,31 +6,32 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" type="text/css" media="all" href="styles.css"/>
     <script>
-        var skillList="";
+        var skillList = "";
         var i = 0;
-        function addSkill(){
-            var skills= document.getElementById("addSkill").value;
-            if(skills != ""){
-                skillList += "<li><span name='skillItem' id='skillItem"+ i +"'>" + skills + "</span> " +
+
+        function addSkill() {
+            var skills = document.getElementById("addSkill").value;
+            if (skills != "") {
+                skillList += "<li><span name='skillItem' id='skillItem" + i + "'>" + skills + "</span> " +
                     "<a onclick='removeSkill()'>remove</a></li>";
                 i++;
                 document.getElementById("skill").innerHTML = skillList;
-                document.getElementById("addSkill").value="";
+                document.getElementById("addSkill").value = "";
             }
         }
 
-        function removeSkill(){
-            skillList="";
-            var items = document.querySelectorAll("#skill li"),index,tab = [];
-            for(var j = 0; j < items.length; j++){
+        function removeSkill() {
+            skillList = "";
+            var items = document.querySelectorAll("#skill li"), index, tab = [];
+            for (var j = 0; j < items.length; j++) {
                 tab.push(items[j].innerHTML);
             }
-            for(var j = 0; j < items.length; j++){
-                items[j].onclick = function(){
+            for (var j = 0; j < items.length; j++) {
+                items[j].onclick = function () {
 
                     index = tab.indexOf(this.innerHTML);
                     items[index].parentNode.removeChild(items[index]);
-                    tab.pop(j,1);
+                    tab.pop(j, 1);
                 };
             }
         }
@@ -51,46 +52,59 @@
 
 <h1>Finish this Assignment</h1>
 
-<form id="upload" action="parent_assigns.html" method="POST" enctype="multipart/form-data">
+<form id="upload" action="student_assignment_list.html" method="POST" enctype="multipart/form-data">
 
-    <label for="title">Title:</label>
-    <label id="title" name="title" >Placeholder for now<br><br>
+    <label for="title">{d[assignment_name}}</label>
+    <label for="title">{d[assignment_description}}</label>
 
-        <!-- <textarea rows="4" cols="50" name="comment" form="upload">
-    Assignment description...</textarea><br><br> -->
-        <label for="startDate">Finish this assignment by: **due date goes here** </label> <br> <br>
-<!--        <input type="date" name="Startdate" id="startDate"><br><br>-->
-<!--        <label for="startDate">End date:</label>-->
-<!--        <input type="date" name="Enddate" id="endDate"><br><br>-->
-    <label id="completed" name="completed">Check this checkbox if the assignment is completed:
+    {% for skill in d[assignment_skill] %}
+    <ul>
+        <li>{{skill}}</li>
+    </ul>
+    {{% endfor %}}
+
+    <br><br>
+
+    {% for i in d[assignment_attachments] %}
+    <img src="{{url_for('static', filename='i')}}" align="middle"/>
+    {{% endfor %}}
+
+    <br><br>
+    <!--    <label id="title" name="title" >Placeholder for now<br><br>-->
+
+    <!-- <textarea rows="4" cols="50" name="comment" form="upload">
+Assignment description...</textarea><br><br> -->
+    <label for="startDate">Finish this assignment by: {d[assignment_duedate}} </label> <br> <br>
+    <!--        <input type="date" name="Startdate" id="startDate"><br><br>-->
+    <!--        <label for="startDate">End date:</label>-->
+    <!--        <input type="date" name="Enddate" id="endDate"><br><br>-->
+    <label id="completed" name="completed">Check this checkbox if the assignment is completed: </label>
         <input type="checkbox" name="chk-box-completed">
         <br><br>
 
-    <fieldset>
-        <legend>File Upload</legend>
+        <fieldset>
+            <legend>Uploads</legend>
 
-        <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000"/>
+            <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000"/>
 
-        <div>
-            <label for="fileselect">Files to upload:</label>
-            <input type="file" id="fileselect" name="fileselect[]" multiple="multiple"/>
-            <div id="filedrag">or drop files here</div>
-        </div>
+            <div>
+                <label for="fileselect">Files to upload:</label>
+                <input type="file" id="fileselect" name="fileselect[]" multiple="multiple"/>
+                <div id="filedrag">or drop files here</div>
+            </div>
 
-        <div id="submitbutton">
-            <button type="submit">Upload Files</button>
-        </div>
+            <div id="submitbutton">
+                <button type="submit">Upload Files</button>
+            </div>
 
-    </fieldset>
-
-
-</form>
+        </fieldset>
+  </form>
 
 <div id="messages">
 </div>
 
-<input type="submit" value="Submit" form="upload">
-
+<input type="submit" value="Submit" form="upload" id="submit">
 <script src="filedrag.js"></script>
+
 </body>
 </html>

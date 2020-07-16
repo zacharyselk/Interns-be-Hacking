@@ -18,20 +18,9 @@
         width: 100%;
         background-color: #f1f1c1;
     }
-    .big-btn {
-        background-color: #000000;
-        color: #FFFFFF;
-        padding: 10px;
-        width: 90px;
-        height: 40px;
-        border-radius: 10px;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        margin:10px
-    }
 </style>
 <body>
-<h1>Assignments</h1>
+<h1>Student Assignments</h1>
 <table style="width:100%">
     <tr onclick=myFunction(this)>
         <th>Assignments</th>
@@ -44,23 +33,12 @@
         <td>{{d["assignment_duedate"]}}</td>
         <td>{{d["assignment_status"]}}</td>
     </tr>
+    {{% endfor %}}
 
 </table>
-
-<br><br>
-<button class="button big-btn" id="button" value="parent_assigns.html">Add Assignment </button>
-
 <script>
-    var button = document.getElementById('button');
-
-    window.onclick = function(event) {
-        if(event.target == button){
-            window.open('parent_assigns.html', '_self');
-        }
-    }
-
     function myFunction(x) {
-        window.open('assignment.html', '_self');
+    window.open('student_assignment.html', '_self');
     }
 </script>
 </body>
