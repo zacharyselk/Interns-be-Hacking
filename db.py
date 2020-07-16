@@ -58,9 +58,8 @@ class Database:
         assignments = []
         for assignment in self.list_assignments():
             asn = self.database[assignment]
-            print(asn)
             asn_obj = Assignment(asn['_id'], asn['Title'], asn['Text'],
-                                 asn['Due Date'], asn['Completed']))
+                                 asn['Due Date'], asn['Completed'])
             asn_obj.document_ref = self.database[assignment]
             assignments.append(asn_obj)
 
@@ -82,10 +81,27 @@ class Database:
         return None
 
 
+
+# Returns a list of attachment names
+def get_attachment_names(document):
+    db_attachments = document['_attachments']
+    return list(map(lambda x: x, db_attachments))
+
+# Writes attachment to disk
+def write_attachment(document, attachment_name, filename):
+    with open(filename, "wb") as f:
+        document.get_attachment(attachment_name, write_to=f)
+
+
 db = Database(API_KEY["username"], API_KEY["apikey"])
 
 asn1 = Assignment("Assignment001", "History", "Learn about the civil war", "15/07/20")
 db.create_assignment(asn1)
-db.get_assignments()
+a = db.get_assignments()
+db.add_attachment(a[0], "./test-img.jpg", "image2.jpg")
+
+attachments = get_attachment_names(a[0].document_ref)
+print(attachments)
+write_attachment(a[0].document_ref, attachments[0], "img.jpg")
 
 db.disconnect()
