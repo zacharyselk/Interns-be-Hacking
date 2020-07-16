@@ -1,11 +1,5 @@
 from cloudant.client import Cloudant
 import mimetypes
-import base64
-from email.mime.audio import MIMEAudio
-from email.mime.base import MIMEBase
-from email.mime.image import MIMEImage
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import io
 
 
@@ -79,9 +73,9 @@ class Database:
 
 
     def get_data(self, assignment):
-        for assgn in self.database.all_docs()['rows']:
-            if assgn['id'] == assignment:
-                return assign
+        for row in self.database.all_docs()['rows']:
+            if row['id'] == assignment._id:
+                return row
         return None
 
 
