@@ -78,6 +78,12 @@ body {
 	}
 }
 
+article #timer{
+	color: crimson;
+}
+
+
+
 body
 {
 	font-family: "Segoe UI", Tahoma, Helvetica, freesans, sans-serif;

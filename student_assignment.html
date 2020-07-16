@@ -50,6 +50,15 @@
     </div>
 </div>
 
+<!-- Creat Countdown Timer -->
+<article class="clock" id="model3">
+    <h3></h3>
+
+    <div class="count">
+        <div id="timer"></div>
+    </div>
+</article>
+
 <h1>Finish this Assignment</h1>
 
 <form id="upload" action="student_assignment_list.html" method="POST" enctype="multipart/form-data">
@@ -102,7 +111,62 @@ Assignment description...</textarea><br><br> -->
 
 <div id="messages">
 </div>
+<script>
+    var sec         = 1500,
+        totalTime = 1500,
+        countDiv    = document.getElementById("timer"),
+        secpass,
+        countDown   = setInterval(function () {
+            'use strict';
 
+            secpass();
+        }, 1000);
+
+    function secpass() {
+        'use strict';
+
+        var min     = Math.floor(sec / 60),
+            remSec  = sec % 60;
+
+        if (remSec < 10) {
+
+            remSec = '0' + remSec;
+
+        }
+        if (min < 10) {
+
+            min = '0' + min;
+
+        }
+        var saying = " till break!";
+        if(totalTime == 300){
+            saying = " till back to work!"
+        }
+        countDiv.innerHTML = min + ":" + remSec + saying;
+
+        if (sec > 0) {
+
+            sec = sec - 1;
+
+        } else {
+
+            clearInterval(countDown);
+            alert("Take a 5 min break :)")
+            var h3 = document.getElementsByTagName("h3");
+            h3[0].innerHTML = "Countdown Timer With JS";
+            sec         = 300,
+                totalTime =300,
+                countDiv    = document.getElementById("timer"),
+                secpass,
+                countDown   = setInterval(function () {
+                    'use strict';
+
+                    secpass();
+                }, 1000);
+        }
+    }
+
+</script>
 <input type="submit" value="Submit" form="upload" id="submit">
 <script src="filedrag.js"></script>
 
